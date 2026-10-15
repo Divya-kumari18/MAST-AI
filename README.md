@@ -1,94 +1,174 @@
-# 🤖 MAST AI by Divya
+# 🤖 MAST AI — Your Personalized AI Assistant
 
-### Your Smart AI Assistant | Prompt Engineering Project
+### *One AI. Multiple Personalities. Endless Possibilities.*
 
-MAST AI by Divya is an interactive AI-powered chatbot developed as part of my **Prompt Engineering learning journey**. The project explores how Large Language Models (LLMs) can be integrated into a user-friendly application and guided through carefully designed prompts to generate helpful, context-aware responses.
+MAST AI is a web-based AI chatbot designed to provide interactive, personalized, and context-aware conversations through multiple AI personas. Built with **Flask, Python, HTML, CSS, JavaScript, and Groq-powered LLM inference**, the application combines a clean web interface with an AI-powered backend.
 
-Built using Python and Streamlit, MAST AI provides a conversational interface where users can ask questions, explore ideas, learn new concepts, and get programming assistance. It integrates Groq's API through LiteLLM, allowing the application to communicate with an AI model without exposing API credentials in the source code.
-
-The project combines **Prompt Engineering, LLM integration, Python development, and interactive UI design** to create a practical AI assistant.
+The project also explores **Prompt Engineering** to customize the behavior, tone, and response style of an AI assistant for different use cases, including learning, programming, professional assistance, and creative thinking.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-- **💬 Interactive AI Chat:** Ask questions and receive AI-generated responses through a conversational interface.
-- **🎭 Multiple Assistant Personalities:** Choose from five different personalities:
-  - **Friendly:** Conversational, engaging, and helpful responses.
-  - **Teacher:** Step-by-step explanations with simple examples.
-  - **Coder:** Programming assistance, code generation, and explanations.
-  - **Creative:** Brainstorming, original ideas, and creative suggestions.
-  - **Professional:** Clear, structured, and practical responses.
-- **🧠 Prompt-Based Behaviour:** Uses system prompts to guide the assistant's tone, role, and response style.
-- **📜 Conversation History:** Maintains messages during the current Streamlit session.
-- **🆕 New Conversation:** Starts a fresh chat while retaining the previous conversation in the session.
-- **🧹 Clear Chat:** Clears the current conversation.
-- **⬇️ Download Chat:** Exports the current conversation as a text file.
-- **🎨 Custom User Interface:** Features a dark blue background, purple gradient header, styled chat messages, and a sidebar for settings and quick actions.
-- **🔐 API Key Management:** Loads the Groq API key from environment variables instead of hardcoding it in the application.
-- **☁️ Deployment Ready:** Can be deployed using Streamlit Community Cloud with the API key configured through its Secrets settings.
+- 💬 **AI-Powered Conversations:** Generate responses using a large language model through the Groq API and LiteLLM.
+- 🎭 **Multiple AI Personas:** Switch between five personalities based on your needs.
+- 🧠 **Context-Aware Chat:** Send recent conversation history to help the model respond with relevant context.
+- 🎨 **Interactive Web Interface:** Chat through a custom HTML, CSS, and JavaScript frontend.
+- ⚡ **Fast Inference:** Use Groq's inference service to generate AI responses.
+- 🔐 **Environment-Based API Configuration:** Keep API credentials outside the application source code.
+- 🌐 **Web Deployment:** Deploy the Flask application as a web service using Render.
+- 🛠️ **Prompt Engineering:** Use carefully designed system prompts to guide the assistant's behavior.
 
 ---
 
-## 🛠️ Technologies Used
+## 🎭 AI Personas
 
-| Technology | Purpose |
+MAST AI supports five personas, each with its own system prompt.
+
+| Persona | Purpose |
 |---|---|
-| Python | Core programming language used to build the application. |
-| Streamlit | Creates the interactive web interface, chat layout, sidebar, buttons, and session state. |
-| Groq API | Provides access to the hosted language model used to generate responses. |
-| LiteLLM | Connects the Python application to the language model through a unified completion interface. |
-| `openai/gpt-oss-20b` via Groq | The configured language model used to generate chatbot responses. |
-| Prompt Engineering | Defines system instructions and assistant personalities to guide response behaviour. |
-| `python-dotenv` | Loads environment variables from the local `.env` file during development. |
-| Python `os` module | Reads the API key from environment variables. |
-| Python `datetime` module | Adds timestamps to previous conversations. |
-| Git and GitHub | Version control and source code hosting. |
-| Streamlit Community Cloud | Hosting option for publishing and sharing the chatbot online. |
+| 😊 Friendly | Provides conversational, helpful, and engaging responses. |
+| 📚 Teacher | Explains concepts step by step with simple examples. |
+| 💻 Coder | Helps with programming, code generation, and logic explanations. |
+| 🎨 Creative | Suggests original ideas and creative solutions. |
+| 💼 Professional | Provides clear, structured, and practical answers. |
+
+The selected persona changes the system instruction sent to the language model, allowing the same underlying model to respond in different styles.
 
 ---
 
-## 🧠 Prompt Engineering Concepts
+## 🧰 Technologies Used
 
-Prompt Engineering is a key part of this project. Instead of using the same instructions for every interaction, MAST AI uses system prompts to define the assistant's role and expected behaviour.
+### 1. Python
+**Role: Backend programming language**
 
-### 1. Role-Based Prompting
+Python handles the application's backend logic, processes incoming chat requests, manages conversation data, and coordinates calls to the AI model.
 
-Each personality is assigned a specific role and response style. For example, the Teacher personality is instructed to explain concepts step by step, while the Coder personality focuses on correct code and important programming logic.
+### 2. Flask
+**Role: Web framework**
 
-### 2. System Instructions
+Flask connects the frontend to the backend and exposes HTTP routes.
 
-The application passes a system message to the model before the conversation. This provides the overall instructions that guide how the assistant should respond.
+- `/` — Serves the main chatbot interface.
+- `/api/chat` — Accepts chat requests through POST and returns AI-generated responses in JSON format.
 
-### 3. Contextual Conversations
+Flask also handles request validation and error responses.
 
-Previous messages are included in the model request, allowing the assistant to consider recent conversation context when generating a response.
+### 3. LiteLLM
+**Role: Language model integration**
 
-### 4. Controlling Response Generation
+LiteLLM provides a unified interface for calling supported language models. In this project, it is used to send messages to the configured model and retrieve its response.
 
-The application configures parameters such as temperature and maximum output tokens to influence response generation.
+### 4. Groq API
+**Role: AI inference service**
 
-- **Temperature:** Set to `0.7` to configure the model's response generation behaviour.
-- **Maximum output tokens:** Set to `1200` to limit the length of an individual response.
+Groq provides the inference infrastructure used to generate responses from the configured large language model.
 
-### 5. Prompt Customization
+**Configured model:** `groq/openai/gpt-oss-20b`
 
-Users can switch between Friendly, Teacher, Coder, Creative, and Professional modes. This demonstrates how changing the instructions supplied to an LLM can influence its response style for different tasks.
+The application sends the system prompt and recent conversation messages to the model through LiteLLM.
+
+### 5. HTML5
+**Role: Frontend structure**
+
+HTML defines the structure of the chatbot interface, including the main page elements and the areas used to display conversations and controls.
+
+### 6. CSS3
+**Role: Styling and visual presentation**
+
+CSS controls the appearance of the interface, including layout, spacing, colors, typography, and visual styling.
+
+### 7. JavaScript
+**Role: Frontend interaction**
+
+JavaScript makes the interface interactive and communicates with the Flask backend. It can send chat requests to `/api/chat` and handle the JSON responses returned by the server.
+
+### 8. python-dotenv
+**Role: Environment variable management**
+
+The `python-dotenv` package loads variables from a local `.env` file during development. The application reads the Groq API key through `os.getenv("GROQ_API_KEY")`.
+
+On Render, the API key is configured through the service's Environment Variables settings.
+
+### 9. Gunicorn
+**Role: Production application server**
+
+Gunicorn runs the Flask application in a deployment environment. It is used as the production start command on Render.
+
+### 10. Render
+**Role: Application hosting and deployment**
+
+Render hosts the Flask web application and provides a public URL for accessing the deployed chatbot.
 
 ---
 
-## ⚙️ How It Works
+## 🧠 Prompt Engineering in MAST AI
 
-1. The user enters a message through the Streamlit chat interface.
-2. The application retrieves the selected assistant personality.
-3. A system prompt and recent conversation messages are prepared.
-4. LiteLLM sends the request to the configured language model through Groq.
-5. The model generates a response.
-6. Streamlit displays the response and stores it in the current session's conversation history.
+Prompt Engineering is an important part of this project. It involves designing instructions that guide a language model to respond in a desired manner.
 
-**Simplified workflow:**
+MAST AI uses **system prompts** to define the behavior of each persona.
 
-`User Input → Streamlit → System Prompt + Chat Context → LiteLLM → Groq API → AI Response → Chat Interface`
+For example, the Teacher persona is guided to explain concepts step by step using simple examples, while the Coder persona is instructed to provide correct code and explain important logic.
+
+### How Prompt Engineering Is Used
+
+1. **Role Definition:** Each persona is assigned a specific role and purpose.
+2. **Response Style Customization:** Instructions guide the tone and structure of responses.
+3. **Task-Oriented Behavior:** The prompts emphasize the needs of different users, such as learners and programmers.
+4. **Dynamic Prompt Selection:** The application selects the system prompt based on the persona chosen by the user.
+5. **Conversation Context:** Recent user and assistant messages are included with the system prompt to help the model maintain conversational relevance.
+
+This approach demonstrates how prompt design can customize an AI application's behavior without training a separate model for every persona.
+
+---
+
+## ⚙️ How the Application Works
+
+1. **User Input:** The user enters a message through the chatbot interface.
+2. **Frontend Request:** JavaScript sends the conversation messages and selected persona to the Flask `/api/chat` endpoint.
+3. **Request Validation:** Flask checks the submitted data, validates the persona, and filters messages to accepted roles.
+4. **Prompt Construction:** The backend combines the selected persona's system prompt with recent conversation history.
+5. **AI Inference:** LiteLLM sends the request to the configured Groq-hosted model.
+6. **Response Processing:** Flask extracts the model's response and returns it as JSON.
+7. **Frontend Display:** JavaScript receives the response and displays it in the chatbot interface.
+
+### Architecture Overview
+
+```text
+             USER
+               |
+               v
+       HTML + CSS Interface
+               |
+               v
+       JavaScript (Frontend)
+               |
+          POST /api/chat
+               |
+               v
+         Flask Backend
+               |
+       Persona System Prompt
+               +
+      Recent Conversation History
+               |
+               v
+             LiteLLM
+               |
+               v
+          Groq API
+               |
+               v
+     Configured Language Model
+               |
+       AI-Generated Response
+               |
+               v
+       Flask JSON Response
+               |
+               v
+       Chatbot Interface
+```
 
 ---
 
@@ -97,103 +177,121 @@ Users can switch between Friendly, Teacher, Coder, Creative, and Professional mo
 ```text
 MAST-AI/
 │
-├── app.py             # Main Streamlit chatbot application
-├── chatbot.ipynb      # Notebook used for experimentation
-├── requirements.txt   # Python dependencies
-├── .gitignore         # Excludes secrets and local environment files
-└── README.md          # Project documentation
+├── app.py                  # Flask backend and chat API
+├── requirements.txt        # Python dependencies
+├── .gitignore              # Excludes sensitive and temporary files
+├── .env                    # Local environment variables (not committed)
+│
+├── templates/
+│   └── index.html          # Main chatbot webpage
+│
+└── static/
+    ├── style.css           # Frontend styling
+    └── script.js           # Frontend interaction and API requests
 ```
 
-The `.env` file and `.venv` directory are used locally and should not be committed to the public repository.
+> The `.env` file is for local development and should not be committed to GitHub. Render environment variables are configured separately.
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Run the Project Locally
 
 ### Prerequisites
 
-- Python installed on your computer.
-- A Groq API key.
-- Git, if you want to clone the repository.
+- Python 3 installed
+- Git installed
+- A Groq API key
+- Internet access for AI inference
 
-### 1. Clone the repository
+### Step 1: Clone the repository
 
 ```bash
 git clone https://github.com/Divya-kumari18/MAST-AI.git
 cd MAST-AI
 ```
 
-### 2. Create and activate a virtual environment
+### Step 2: Create and activate a virtual environment
 
-Create the environment:
-
-```bash
-python -m venv .venv
-```
-
-Activate it on Windows PowerShell:
+**Windows PowerShell**
 
 ```powershell
+py -3.13 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 3. Install dependencies
+If Python 3.13 is not installed, create the environment using an available compatible Python version.
+
+### Step 3: Install dependencies
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-### 4. Configure the API key
+### Step 4: Configure the API key
 
-Create a `.env` file in the project directory and add:
+Create a `.env` file in the project root:
 
-```text
-GROQ_API_KEY=your_actual_groq_api_key
+```env
+GROQ_API_KEY=your_groq_api_key_here
 ```
 
-Replace the placeholder with your own Groq API key.
+Replace the placeholder with your actual API key. Never publish the real key.
 
-**Security note:** Never upload your `.env` file or publish your API key on GitHub.
-
-### 5. Run the application
+### Step 5: Start the application
 
 ```bash
-python -m streamlit run app.py
+python app.py
 ```
 
-Streamlit will provide a local URL, usually:
+Open the local address shown in the terminal, usually:
 
 ```text
-http://localhost:8501
+http://127.0.0.1:5000
 ```
 
-Open that URL in your browser to use MAST AI.
+---
+
+## ☁️ Deployment on Render
+
+MAST AI can be deployed as a **Render Web Service** because it uses Flask for backend request handling.
+
+Configure the service as follows:
+
+| Setting | Value |
+|---|---|
+| Repository | `Divya-kumari18/MAST-AI` |
+| Branch | `main` |
+| Runtime | Python 3 |
+| Build Command | `pip install -r requirements.txt` |
+| Start Command | `gunicorn app:app` |
+
+### Environment Variable
+
+Add the following in the Render service's Environment settings:
+
+| Key | Value |
+|---|---|
+| `GROQ_API_KEY` | Your actual Groq API key |
+
+After configuration, create or deploy the Web Service. Render will provide a public URL when the service is available.
+
+**Security note:** Never expose your API key in frontend JavaScript, HTML, public commits, or screenshots.
 
 ---
 
-## ☁️ Deployment
+## 🔒 Error Handling and Basic Security
 
-MAST AI can be deployed using **Streamlit Community Cloud**.
+The backend includes several useful safeguards:
 
-1. Push the project files to GitHub.
-2. Sign in to Streamlit Community Cloud using GitHub.
-3. Create a new app and select the `MAST-AI` repository.
-4. Set `app.py` as the main application file.
-5. Add `GROQ_API_KEY` through the app's Secrets settings.
-6. Deploy the application and share the generated URL.
+- Checks whether the Groq API key is configured.
+- Validates incoming chat messages.
+- Accepts only `user` and `assistant` message roles.
+- Limits the number of recent messages and the length of individual message content.
+- Uses a default persona if an unsupported persona is submitted.
+- Returns JSON error messages when a request fails.
+- Keeps the API key in an environment variable rather than hardcoding it in the source code.
 
-The API key should be stored in the hosting platform's secret settings rather than committed to the repository.
-
----
-
-## 🔒 Security and Limitations
-
-- API credentials are loaded through environment variables.
-- Public repositories must not contain API keys or other secrets.
-- API requests consume the configured Groq account's available usage and are subject to its applicable limits and terms.
-- Conversation history and previous chats are stored in Streamlit session state; they are not a permanent database and may not persist across sessions.
-- The application depends on API availability, model access, network connectivity, and service limits.
-- The current version does not implement user authentication or a permanent, multi-user conversation database.
+These measures improve basic input handling and configuration security. They do not replace a full production security review.
 
 ---
 
@@ -201,38 +299,46 @@ The API key should be stored in the hosting platform's secret settings rather th
 
 Through this project, I explored:
 
-- Applying Prompt Engineering concepts in a working application.
-- Integrating a hosted Large Language Model into a Python project.
-- Designing system prompts for different assistant roles.
-- Managing conversation context and application state.
-- Building interactive web applications using Streamlit.
-- Using environment variables for API key management.
-- Organizing dependencies and preparing an application for cloud deployment.
-- Combining backend API integration with user interface design.
+- Building a web application with Python and Flask.
+- Connecting a frontend to a backend using HTTP requests and JSON.
+- Integrating a large language model through LiteLLM and the Groq API.
+- Designing system prompts for persona-based AI interactions.
+- Applying Prompt Engineering to customize model behavior.
+- Managing API credentials through environment variables.
+- Handling request validation and AI API errors.
+- Preparing and deploying a Python web application on Render.
+- Organizing a project into frontend, backend, and configuration files.
 
 ---
 
-## 🔮 Future Enhancements
+## 🔮 Future Improvements
 
-- Add user authentication and access control.
-- Store conversation history persistently in a database.
-- Add streaming responses for a more responsive chat experience.
-- Introduce additional assistant personalities and customizable prompts.
-- Support document uploads and question answering over user-provided files.
-- Add usage monitoring and safeguards against excessive API consumption.
+Potential future enhancements include:
 
----
+- Persistent chat history across sessions.
+- User authentication and personalized settings.
+- Streaming AI responses for a more responsive experience.
+- Additional personas and configurable response styles.
+- Improved error messages and API usage monitoring.
+- Automated tests for backend routes and request validation.
+- Rate limiting and additional production security controls.
 
-## 👩‍💻 Author
-
-**Divya Kumari**
-
-Created as part of my learning journey in **Prompt Engineering and AI application development**.
-
-- **GitHub:** [Divya-kumari18](https://github.com/Divya-kumari18)
+These are potential enhancements, not claims about features already implemented.
 
 ---
 
-⭐ If you find this project interesting, feel free to explore the repository and share your feedback.
+## 👩‍💻 Project Credits
 
-*MAST AI by Divya — Exploring the possibilities of Prompt Engineering and Generative AI.*
+**Developed by Divya Kumari**
+
+MAST AI was developed as a practical exploration of AI-powered application development, API integration, and **Prompt Engineering**.
+
+The project brings together web development and large language model integration to demonstrate how a carefully designed interface, backend API, and system prompts can work together to create a personalized AI assistant.
+
+### Technologies at a Glance
+
+`Python` · `Flask` · `LiteLLM` · `Groq API` · `HTML5` · `CSS3` · `JavaScript` · `Prompt Engineering` · `python-dotenv` · `Gunicorn` · `Render`
+
+---
+
+⭐ If you find this project interesting, consider giving the repository a star!
