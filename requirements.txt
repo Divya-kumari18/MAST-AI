@@ -1,4 +1,5 @@
 
-streamlit
+flask
 litellm
 python-dotenv
+gunicorn

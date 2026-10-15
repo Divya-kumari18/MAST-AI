@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1220">
+    <title>MAST AI by Divya</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <a class="brand" href="/">
+                <span class="brand-icon">✦</span>
+                <span>MAST AI <small>by Divya</small></span>
+            </a>
+
+            <p class="sidebar-subtitle">YOUR SMART AI ASSISTANT</p>
+
+            <button id="new-chat" class="side-button primary-button">
+                ＋ New Conversation
+            </button>
+
+            <button id="clear-chat" class="side-button">
+                🧹 Clear Chat
+            </button>
+
+            <div class="side-section">
+                <label for="persona">🎭 Personality</label>
+                <select id="persona">
+                    <option>Friendly</option>
+                    <option>Teacher</option>
+                    <option>Coder</option>
+                    <option>Creative</option>
+                    <option>Professional</option>
+                </select>
+            </div>
+
+            <div class="side-section">
+                <h3>📜 Previous Conversations</h3>
+                <div id="history-list" class="history-list">
+                    <p class="muted">Your recent chats will appear here.</p>
+                </div>
+            </div>
+
+            <div class="sidebar-bottom">
+                <div class="connection">
+                    <span class="status-dot"></span>
+                    Groq + LiteLLM
+                </div>
+                <p>Made with ♥ by Divya</p>
+            </div>
+        </aside>
+
+        <main class="main-panel">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">YOUR PERSONAL AI SPACE</p>
+                    <h1>MAST AI <span>by Divya</span></h1>
+                </div>
+                <button id="download-chat" class="download-button">
+                    ↓ Download Chat
+                </button>
+            </header>
+
+            <section id="welcome" class="welcome">
+                <div class="hero-icon">✦</div>
+                <p class="eyebrow">WELCOME TO YOUR AI SPACE</p>
+                <h2>Hey there! What’s on<br>your <span>mind today?</span></h2>
+                <p class="welcome-description">
+                    Ask questions, learn something new, write code,
+                    or explore your next big idea.
+                </p>
+
+                <div class="suggestions">
+                    <button class="suggestion" data-prompt="Explain prompt engineering with a simple example.">
+                        <span>💡</span>
+                        <strong>Learn something</strong>
+                        <small>Understand a new concept</small>
+                    </button>
+
+                    <button class="suggestion" data-prompt="Help me write and understand a Python program.">
+                        <span>💻</span>
+                        <strong>Write some code</strong>
+                        <small>Build or debug a program</small>
+                    </button>
+
+                    <button class="suggestion" data-prompt="Suggest some creative AI project ideas for a student.">
+                        <span>🎨</span>
+                        <strong>Explore ideas</strong>
+                        <small>Brainstorm something new</small>
+                    </button>
+                </div>
+            </section>
+
+            <section id="chat-messages" class="chat-messages"
+                     aria-live="polite" hidden></section>
+
+            <div class="composer-area">
+                <form id="chat-form" class="composer">
+                    <textarea id="message-input"
+                              placeholder="Message MAST AI by Divya..."
+                              rows="1"
+                              maxlength="12000"
+                              aria-label="Your message"
+                              required></textarea>
+                    <button id="send-button" type="submit" aria-label="Send message">
+                        ↑
+                    </button>
+                </form>
+                <p class="disclaimer">
+                    AI can make mistakes. Verify important information.
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
